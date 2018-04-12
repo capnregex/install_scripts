@@ -1,0 +1,3 @@
+#!/bin/sh -eux
+# Remove caches
+find /var/cache -type f -exec rm -rf {} \;

@@ -1,0 +1,14 @@
+#!/bin/sh -eux
+
+# Delete obsolete networking
+apt-get -y purge ppp pppconfig pppoeconf
+
+# Delete oddities
+apt-get -y purge popularity-contest installation-report laptop-detect
+#  command-not-found command-not-found-data 
+#  friendly-recovery bash-completion 
+#  fonts-ubuntu-font-family-console 
+
+# Delete the massive firmware packages
+apt-get -y purge linux-firmware
+

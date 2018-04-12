@@ -1,0 +1,4 @@
+#!/bin/sh -eux
+# Remove docs
+
+rm -rf /usr/share/doc/*

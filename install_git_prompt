@@ -1,0 +1,20 @@
+#!/bin/bash 
+# see https://corlewsolutions.com/articles/article-118-enhance-your-git-prompt
+
+mkdir -p ~/.bash_scripts
+cd ~/.bash_scripts
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o git-prompt.sh
+chmod +x ~/.bash_scripts/git-prompt.sh # make sure the script is executeable
+
+prompt='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033[01;34m\] \n\$\[\033[00m\] '
+cat <<PROMPT > ~/.prompt
+# configure the git-prompt.sh script
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+source ~/.bash_scripts/git-prompt.sh
+export PS1='$prompt'
+PROMPT
+
+echo "source ~/.prompt" >> ~/.bashrc
+

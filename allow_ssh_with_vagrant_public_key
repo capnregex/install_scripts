@@ -1,0 +1,12 @@
+#!/bin/sh -eux
+
+pubkey_url="https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub";
+
+wget --no-check-certificate "$pubkey_url"
+
+mkdir -p ~/.ssh;
+cat vagrant.pub >> ~/.ssh/authorized_keys
+
+chmod -R go-rwsx ~/.ssh;
+sudo chown -R vagrant:vagrant ~/.ssh;
+

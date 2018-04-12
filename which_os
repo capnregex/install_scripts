@@ -1,0 +1,9 @@
+#!/bin/sh 
+
+osname=$( uname | sed 's/[0-9].*$//' | tr '[:upper:]' '[:lower:]' )
+echo $osname
+
+# mingw = windows
+# linux = linux
+# darwin = mac
+

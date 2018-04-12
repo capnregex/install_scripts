@@ -1,0 +1,10 @@
+#!/bin/sh -eux
+
+cleanup_apt
+
+apt-get -y autoremove
+apt-get -y clean
+
+# clear apt-cache
+rm -f /var/lib/apt/lists
+

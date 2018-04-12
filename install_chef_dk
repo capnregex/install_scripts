@@ -1,0 +1,14 @@
+#!/bin/bash -eux
+
+host=packages.chef.io
+chef_ver=2.4.17
+os=ubuntu
+os_ver=16.04
+file=chefdk_2.4.17-1_amd64.deb
+
+url=https://$host/files/stable/chefdk/$chef_ver/$os/$os_ver/$file
+
+wget $url
+
+dpkg -i $file
+

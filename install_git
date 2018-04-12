@@ -1,0 +1,14 @@
+#!/bin/sh -eux
+
+# Use the latest version of Git.  
+# The following will add the PPA and install:
+
+sudo add-apt-repository -y ppa:git-core/ppa
+sudo apt-get -y update
+sudo apt-get -y install git
+
+# standard aliases 
+git config --global alias.logg 'log --oneline --graph --decorate'
+git config --global alias.sync '!git fetch origin && git remote prune origin && :'
+git config --global alias.reebase-master '!git fetch origin master:master && git rebase master'
+

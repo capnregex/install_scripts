@@ -1,0 +1,14 @@
+#!/bin/sh -eux
+
+VER=$( cat ~/.vbox_version )
+ISO="VBoxGuestAdditions_$VER.iso"
+
+sudo mkdir -p /tmp/vbox
+sudo mount -o loop ~/$ISO /tmp/vbox
+sudo sh /tmp/vbox/VBoxLinuxAdditions.run \
+    || echo "VBoxLinuxAdditions.run exited $? and is suppressed." \
+        "For more read https://www.virtualbox.org/ticket/12479"
+sudo umount /tmp/vbox
+sudo rm -rf /tmp/vbox
+rm -f ~/*.iso
+

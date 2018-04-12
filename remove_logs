@@ -1,0 +1,4 @@
+#!/bin/sh -eux
+# delete log files
+find /var/log/ -name *.log -exec rm -f {} \;
+

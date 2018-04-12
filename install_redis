@@ -1,0 +1,11 @@
+#!/bin/sh -eux
+
+mkdir -p /opt/redis
+cd /opt/redis
+sudo chown $USER .
+wget http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+cd redis-stable
+make
+sudo make install
+

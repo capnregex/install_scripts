@@ -1,0 +1,17 @@
+#!/bin/sh -eux
+
+cwd=$PWD
+## find the directory that the script is in.
+dir="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export PATH=$dir:$PATH
+cd $cwd
+
+install_base_box
+# install_google_chrome
+install_git
+install_git_prompt
+install_rvm
+install_nodejs
+install_webkit
+install_mailcatcher
+

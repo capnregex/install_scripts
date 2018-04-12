@@ -1,0 +1,14 @@
+#!/bin/sh -eux
+
+sudo apt-get install -y --no-install-recommends \
+  postgresql postgresql-contrib libpq-dev ruby-pg
+
+sudo -u postgres createuser --superuser $USER
+sudo -u postgres psql <<SQL 
+\password $USER
+$USER
+$USER
+SQL
+
+sudo -u postgres createdb $USER
+

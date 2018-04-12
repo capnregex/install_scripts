@@ -1,0 +1,8 @@
+#!/bin/sh -eux
+
+# Remove apt caches
+find /var/cache -type f -exec rm -rf {} \;
+rm -f /var/lib/apt/lists/*_Packages
+rm -f /var/lib/apt/lists/*_InRelease
+rm -f /var/lib/apt/lists/*_Translation-*
+

@@ -1,0 +1,15 @@
+#!/bin/sh -eux
+
+# load rvm as a function 
+source ~/.rvm/scripts/rvm
+
+# install ruby 2.5.0
+rvm install 2.5.0
+rvm use 2.4.3
+gem update --system
+
+# install and Use Ruby 2.4.3 as default
+rvm install 2.4.3
+rvm use --default 2.4.3
+gem update --system
+

@@ -1,0 +1,12 @@
+#!/bin/bash
+# https://mailcatcher.me/
+
+# load rvm as a function  # sh does not have source
+source ~/.rvm/scripts/rvm
+
+# install mailcatcher in it's own gemset
+rvm default@mailcatcher --create do gem install mailcatcher
+rvm wrapper default@mailcatcher --no-prefix mailcatcher catchmail
+
+rvm cleanup all
+

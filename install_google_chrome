@@ -1,0 +1,19 @@
+#!/bin/sh -eux
+
+key="https://dl-ssl.google.com/linux/linux_signing_key.pub"
+list="/etc/apt/sources.list.d/google-chrome.list"
+repo="http://dl.google.com/linux/chrome/deb/"
+
+wget -q -O - $key | sudo apt-key add - 
+
+sudo tee $list <<CFG 
+deb [arch=amd64] $repo stable main
+CFG
+
+sudo apt-get -y update
+sudo apt-get -y install --no-install-recommends \
+  google-chrome-stable chromium-browser chromium-chromedriver
+
+sudo sed -i 's/^[!#]/# /' $list
+sudo apt-get -y update
+

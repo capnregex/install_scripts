@@ -1,0 +1,58 @@
+#!/bin/bash -eux
+
+cat <<- SOURCES > sources.list
+deb http://us.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse
+# deb-src http://us.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse
+deb http://us.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse
+# deb-src http://us.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse
+deb http://us.archive.ubuntu.com/ubuntu/ xenial-backports main restricted universe multiverse
+# deb-src http://us.archive.ubuntu.com/ubuntu/ xenial-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu xenial-security main restricted universe multiverse
+# deb-src http://security.ubuntu.com/ubuntu xenial-security main restricted universe multiverse
+SOURCES
+sudo cp sources.list /etc/apt
+rm sources.list
+
+sudo apt-get -y update
+sudo apt-get -y upgrade
+
+sudo apt-get -y install xubuntu-core vim-gnome firefox chromium-browser chromium-chromedriver terminator
+
+#allow_user_to_ssh_without_password
+#configure_eth0_for_vm
+# configure_lightdm_to_autologin
+# configure_opensshd
+# configure_vagrant_public_key
+# convert_raw_disk_to_virtual_box
+# generate_rails_secret_key_base
+# install_chef
+# install_docker
+# install_favorite_utilities
+# install_git
+# install_git_prompt
+# install_google_chrome
+# install_heroku_cli
+# install_mailcatcher
+# install_minimal_xfce
+# install_nice_cli_tools
+# install_nox_cli_tools
+# install_postgresql
+# install_redis
+# install_rubies
+# install_rvm
+# install_virtualbox_additions
+# install_webkit
+# install_xubuntu_workstation
+# install_xvfb
+# non_interactive
+# remove_apt_cache
+# remove_docs
+# remove_large_packages_for_packaging
+# remove_logs
+# remove_var_cache_files
+# upgrade_agressively
+# upgrade_packages
+# which_os
+
+# prepare_for_packaging
+# wipe_empty_space_on_drive
