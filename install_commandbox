@@ -20,11 +20,12 @@ box version
 
 cd ~/
 
-box <<INSTALL_PACKAGES
-install cfconfig-services
-install lucee-password-util
-install adobe-password-util
-install propertyFile
-install semver
-INSTALL_PACKAGES
+## 
+# box <<INSTALL_PACKAGES
+# install cfconfig-services
+# install lucee-password-util
+# install adobe-password-util
+# install propertyFile
+# install semver
+# INSTALL_PACKAGES
 
