@@ -1,12 +1,12 @@
 #!/bin/sh -eux
 # prepare box for packaging 
 
-rm -f /home/vagrant/.ssh/id_rsa*
-
-sudo -u vagrant -i /vagrant/bin/cleanup_rvm
+rm -f /home/vagrant/.ssh/id_rsa* /home/vagrant/.gitconfig
 
 apt-get -y autoremove
 apt-get -y clean
+apt-get -y autoclean
+apt -y autoremove
 
 # Remove caches
 find /var/cache /var/lib/apt/lists -type f -exec rm -rf {} \;
@@ -15,16 +15,18 @@ find /var/cache /var/lib/apt/lists -type f -exec rm -rf {} \;
 find /var/log/ -name *.log -exec rm -f {} \;
 
 # Whiteout root
-count=$(df --sync -kP / | tail -n1  | awk -F ' ' '{print $4}')
-count=$(($count-1))
-dd if=/dev/zero of=/tmp/whitespace bs=1M count=$count || echo "dd exit code $? is suppressed"
-rm /tmp/whitespace
+function whiteout_partitions {
+  for part in $@
+  do
+    whitespace=$part/whitespace
+    count=$(df --sync -kP $part | tail -n1  | awk -F ' ' '{print $4}')
+    count=$(($count-1))
+    dd if=/dev/zero of=$whitespace bs=1M count=$count || echo "dd exit code $? is suppressed"
+    rm $whitespace
+  done
+}
 
-# Whiteout /boot
-count=$(df --sync -kP /boot | tail -n1 | awk -F ' ' '{print $4}')
-count=$(($count-1))
-dd if=/dev/zero of=/boot/whitespace bs=1M count=$count || echo "dd exit code $? is suppressed"
-rm /boot/whitespace
+whiteout_partitions / /boot
 
 set +e
 swapuuid="`/sbin/blkid -o value -l -s UUID -t TYPE=swap`"
