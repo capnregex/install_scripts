@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Update apt and install dependencies
+
+## Yarn 
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install python-dev npm yarn
+
+# install core components including Node.js, flow and react-native
+sudo npm install -g n
+sudo n latest
+sudo npm install -g npm@latest
+sudo npm install -g flow-bin
+sudo npm install -g react-native-cli@latest
+sudo npm install -g flow-typed
+
+# watchman will need more memory for file watches
+echo fs.inotify.max_user_watches=16384 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+

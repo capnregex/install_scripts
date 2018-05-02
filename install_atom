@@ -4,9 +4,9 @@
 
 curl -L https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
 sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
-sudo apt-get update
+sudo apt-get -y update
 # Install Atom
-sudo apt-get install atom
+sudo apt-get -y install atom
 # Install Atom Beta
 # sudo apt-get install atom-beta
 
@@ -15,4 +15,23 @@ sudo apt-get install atom
 # sudo apt -y update
 # sudo apt -y install atom
 
+# configure atom with nice packages for RN development
+apm install atom-beautify
+apm install nuclide
+apm install split-lines
+apm install tool-bar
+apm install language-babel
+apm install language-ocaml
+apm install highlight-selected
+apm install linter-eslint
+
+# Setup nuclide dependencies
+echo "################################"
+echo "## Please open Atom, then select"
+echo "## Edit -> Preferences"
+echo "## Under Packages, find Nuclide"
+echo "## Click Settings under Nuclide"
+echo "## Click 'Install Recommended Packages on Startup'"
+echo "## Quit Atom, re-open it"
+echo "################################"
 
