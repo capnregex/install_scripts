@@ -1,0 +1,17 @@
+#!/bin/bash -eux
+
+function npm_cafile {
+  for cafile in $@
+  do
+    if [ -f $cafile ]
+    then
+      npm config set cafile $cafile
+      npm config set "strict-ssl" true
+    fi
+  done
+}
+
+npm_cafile $( ruby -ropenssl -e 'puts OpenSSL::X509::DEFAULT_CERT_FILE' )
+npm_cafile /etc/ssl/certs/ca-certificates.crt
+
+

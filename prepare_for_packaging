@@ -9,7 +9,9 @@ apt-get -y autoclean
 apt -y autoremove
 
 # Remove caches
-find /var/cache /var/lib/apt/lists -type f -exec rm -rf {} \;
+# suspect oracle java install was depending on something in this. 
+# find /var/cache -type f -exec rm -rf {} \;
+find /var/lib/apt/lists -type f -exec rm -rf {} \;
 
 # delete any logs that have built up during the install
 find /var/log/ -name *.log -exec rm -f {} \;

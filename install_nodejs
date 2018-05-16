@@ -1,4 +1,4 @@
-#!/bin/sh -eux
+#!/bin/bash -eux
 
 ## Add yarn repo
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -7,24 +7,19 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt-get -y update
 sudo apt-get -y install npm yarn
 
-if [[ $(uname) -eq 'Darwin' ]]
-then
-  # this command will direct npm to use the ca cert pem bundle homebrew created when 
-  # it installed openssl
-  cafile=$( ruby -ropenssl -e 'puts OpenSSL::X509::DEFAULT_CERT_FILE' )
-  if -f $cafile
-  then
-    npm config set cafile $cafile
-    npm config set "strict-ssl" true
-  fi
-else
-  cafile=/etc/ssl/certs/ca-certificates.crt
-  if -f $cafile
-  then
-    npm config set cafile $cafile
-    npm config set "strict-ssl" true
-  fi
-fi
+function npm_cafile {
+  for cafile in $@
+  do
+    if -f $cafile
+    then
+      npm config set cafile $cafile
+      npm config set "strict-ssl" true
+    fi
+  done
+}
+
+npm_cafile $( ruby -ropenssl -e 'puts OpenSSL::X509::DEFAULT_CERT_FILE' )
+npm_cafile /etc/ssl/certs/ca-certificates.crt
 
 sudo npm install -g n
 
